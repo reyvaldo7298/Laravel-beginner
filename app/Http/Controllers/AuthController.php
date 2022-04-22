@@ -15,17 +15,31 @@ class AuthController extends Controller
 {
     public function index()
     {
+        // Create Role
+        // Table roles
+        // alternative (php artisan permission:create-role 'name-role')
         // Role::create(['name'=>'admin']);
+
+        // Create Permission
         // $permission = Permission::create(['name'=>'Block Access']);
 
-        $role = Role::findById(3);
-        $permission = Permission::findById(4);
-        $role->givePermissionTo($permission);
-        $permission->assignRole($role);
+        // Create Role->Permission
+        // Check (php artisan permission:show)
+        // Table role_has_permissions
+        // $role = Role::findById(2);
+        // $permission = Permission::findById(3);
+        // $role->givePermissionTo($permission);
+        // $permission->assignRole($role);
 
-        // auth()->user()->assignRole('member');
-        // return User::permission('Create Pegawai')->get();
+        // Assign role to user by id
+        // Table model_has_roles
+        // User::find(3)->assignRole('user');
+        // Remove Role by id
+        // User::find(1)->removeRole('member');
+        
         // return auth()->user()->hasAllRoles(Role::all());
+        // return auth()->user()->getRoleNames();
+        // return User::permission('Create Pegawai')->get();
         // return User::role('member')->get();
 
         return view('dashboard');

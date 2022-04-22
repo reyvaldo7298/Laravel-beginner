@@ -1,4 +1,3 @@
-@extends('app')
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +26,11 @@
                         <a class="nav-link" href="{{ route('register-user') }}">Register</a>
                     </li>
                     @else
+                    @role('admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="">User</a>
+                    </li>
+                    @endrole
                     <li class="nav-item">
                         <a href="{{ route('showData') }}" class="nav-link">Pegawai</a>
                     </li>
@@ -39,6 +43,7 @@
         </div>
     </nav>
     <div class="container">
+            {{-- {{ Auth::user()->getRoleNames(); }} --}}
         @yield('content')
     </div>
 </body>

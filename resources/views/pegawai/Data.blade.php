@@ -4,9 +4,9 @@
 
 	{{-- <a href="{{ route('inputData') }}"> + Tambah Pegawai Baru</a> --}}
 
-	@role('admin')
+	@can('Create Pegawai')
 	<a href="{{ route('inputData') }}"> + Tambah Pegawai Baru</a>
-	@endrole
+	@endcan
 	<br/>
 	<br/>
 
