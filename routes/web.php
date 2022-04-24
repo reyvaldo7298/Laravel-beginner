@@ -7,6 +7,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HobbyController;
 use App\Http\Controllers\FileEncryptionController;
 use App\Http\Controllers\StorageFileController;
+use App\Http\Controllers\UserController;
 use App\Models\Hobby;
 
 /*
@@ -35,17 +36,22 @@ Route::post('custom-registration', [AuthController::class, 'customRegistration']
 Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 
 // CRUD
-Route::get('data-pegawai',[PegawaiController::class, 'showData'])->name('showData');
-Route::get('input-pegawai', [PegawaiController::class, 'inputData'])->name('inputData');
-Route::post('store-pegawai', [PegawaiController::class, 'storeData'])->name('storeData');
-Route::get('edit-pegawai/{id}', [PegawaiController::class, 'editData'])->name('editData');
-Route::post('update-pegawai', [PegawaiController::class, 'updateData'])->name('updateData');
-Route::get('hapus-pegawai/{id}', [PegawaiController::class, 'hapusData'])->name('hapusData');
+Route::get('data-pegawai',[PegawaiController::class, 'showData'])->name('showData')->middleware('permission:Data Pegawai');
+Route::get('input-pegawai', [PegawaiController::class, 'inputData'])->name('inputData')->middleware('permission:Create Pegawai');
+Route::post('store-pegawai', [PegawaiController::class, 'storeData'])->name('storeData')->middleware('permission:Create Pegawai');
+Route::get('edit-pegawai/{id}', [PegawaiController::class, 'editData'])->name('editData')->middleware('role:admin|member');
+Route::post('update-pegawai', [PegawaiController::class, 'updateData'])->name('updateData')->middleware('role:admin|member');
+Route::get('hapus-pegawai/{id}', [PegawaiController::class, 'hapusData'])->name('hapusData')->middleware('role:admin|member');
 
 // Hobbies CRUD
 Route::get('data-hobbies', [HobbyController::class, 'showData'])->name('dataHobbies');
 Route::get('form-hobbies', [HobbyController::class, 'viewForm'])->name('formHobbies');
 Route::post('store-hobbies', [HobbyController::class, 'storeData'])->name('storeHobbies');
+
+// User
+Route::get('data-user',[UserController::class, 'showData'])->name('dataUsers')->middleware('role:admin');
+Route::get('edit-user/{id}',[UserController::class, 'editData'])->name('editUser')->middleware('role:admin');
+Route::post('store-user',[UserController::class, 'storeData'])->name('storeUser')->middleware('role:admin');
 
 
 // Relation

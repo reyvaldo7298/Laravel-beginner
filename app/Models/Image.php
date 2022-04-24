@@ -13,4 +13,9 @@ class Image extends Model
     {
         return $this->morphTo();
     }
+
+    // public function employees()
+    // {
+    //     return $this->morphedByMany(Employee::class, 'image');
+    // }
 }

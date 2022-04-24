@@ -14,19 +14,24 @@ class Employee extends Model
     // {
     //     return $this->belongsTo(Position::class);
     // }
+    public function hobi()
+    {
+        return $this->belongsToMany(Hobby::class);
+    }
     
     public function position()
     {
         return $this->belongsTo(Position::class);
     }
 
-    public function hobi()
-    {
-        return $this->belongsToMany(Hobby::class);
-    }
-
+    // v1
     public function image()
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    // public function image()
+    // {
+    //     return $this->morphToMany(Image::class, 'image');
+    // }
 }

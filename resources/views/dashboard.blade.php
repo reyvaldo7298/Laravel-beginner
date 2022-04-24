@@ -28,7 +28,7 @@
                     @else
                     @role('admin')
                     <li class="nav-item">
-                        <a class="nav-link" href="">User</a>
+                        <a class="nav-link" href="{{ route('dataUsers') }}">User</a>
                     </li>
                     @endrole
                     <li class="nav-item">
@@ -39,6 +39,16 @@
                     </li>
                     @endguest
                 </ul>
+            </div>
+
+            <div class="float-right">
+                    Welcome!
+                    <b>
+                    {{ auth()->user()->name }}
+                    @foreach(auth()->user()->getRoleNames() as $role)
+                        ({{ $role }})
+                    @endforeach
+                    </b>
             </div>
         </div>
     </nav>

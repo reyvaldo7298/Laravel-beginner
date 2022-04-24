@@ -42,7 +42,7 @@ class AuthController extends Controller
         // return User::permission('Create Pegawai')->get();
         // return User::role('member')->get();
 
-        return view('dashboard');
+        return view('home');
     }  
       
     public function customLogin(Request $request)

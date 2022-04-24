@@ -13,8 +13,16 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    
+                    Welcome!
 
-                    {{ __('You are logged in!') }}
+                    {{ auth()->user()->name }}
+                    @foreach(auth()->user()->getRoleNames() as $role)
+                        ({{ $role }})
+                    @endforeach
+                    <br>
+                    Goto 
+                    <a href="{{ route('dashboard') }}"> Dashboard</a>
                 </div>
             </div>
         </div>

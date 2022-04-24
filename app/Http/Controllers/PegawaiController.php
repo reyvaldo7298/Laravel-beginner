@@ -13,7 +13,8 @@ class PegawaiController extends Controller
     // CRUD
     public function showData()
     {
-        $employee = Employee::find(2);
+        
+        $employee = Employee::all();
         return view('pegawai.Data',['employee' => $employee]);
     }
     
@@ -57,16 +58,16 @@ class PegawaiController extends Controller
 
     public function editData($id)
     {
-        $pegawai = DB::table('Pegawai')->where('id',$id)->get();
-        return view('pegawai.Edit',['pegawai' => $pegawai]);
+        $employees = DB::table('employees')->where('id',$id)->get();
+        return view('pegawai.Edit',['employees' => $employees]);
     }
 
     public function updateData(Request $request)
     {
-        DB::table('Pegawai')->where('id',$request->id)->update([
-            'nama' => $request->nama,
-            'jabatan' => $request->jabatan,
-            'alamat' => $request->alamat
+        DB::table('employees')->where('id',$request->id)->update([
+            'name' => $request->nama,
+            'position_id' => $request->jabatan,
+            'address' => $request->alamat
         ]);
 
         return redirect('data-pegawai');
@@ -74,7 +75,7 @@ class PegawaiController extends Controller
 
     public function hapusData($id)
     {
-        DB::table('Pegawai')->where('id',$id)->delete();
+        DB::table('employees')->where('id',$id)->delete();
         return redirect('data-pegawai');
     }
     // EOF CRUD
