@@ -32,8 +32,11 @@
                     </li>
                     @endrole
                     <li class="nav-item">
-                        <a href="{{ route('showData') }}" class="nav-link">Pegawai</a>
+                        <a href="{{ route('showData') }}" class="nav-link">Employee</a>
                     </li>
+                    <li class="nav-item">
+                            <a href="{{ route('dataHobbies') }}" class="nav-link">Hobby</a>
+                        </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                     </li>
@@ -42,14 +45,16 @@
             </div>
 
             <div class="float-right">
-                    Welcome!
-                    <b>
-                    {{ auth()->user()->name }}
-                    @foreach(auth()->user()->getRoleNames() as $role)
-                        ({{ $role }})
-                    @endforeach
-                    </b>
+                Welcome!
+                <b>
+                {{ auth()->user()->name }}
+                @foreach(auth()->user()->getRoleNames() as $role)
+                    ({{ $role }})
+                @endforeach
+                </b>
             </div>
+
+            {{-- {{ dd($data) }} --}}
         </div>
     </nav>
     <div class="container">

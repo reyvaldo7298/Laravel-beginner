@@ -54,8 +54,11 @@ class AuthController extends Controller
    
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
-                        ->withSuccess('Signed in');
+            $authUser = Auth::user(); 
+            $success['token'] =  $authUser->createToken('MyAuthApp')->plainTextToken; 
+            return view("dashboard", ['data' => $success['token']]);
+            // return redirect()->intended('dashboard')
+            //             ->withSuccess('Signed in');
         }
   
         return redirect("login")->withSuccess('Login details are not valid');
@@ -68,11 +71,28 @@ class AuthController extends Controller
       
     public function customRegistration(Request $request)
     {  
-        $request->validate([
+        $rules = array(
             'name' => 'required',
+            'phone' => 'required|regex:/(62)[0-9]/',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-        ]);
+        );
+
+        $requestData = $request->all();
+        $str = $requestData['phone'];
+        if(substr($str, 0, 1) === '0'){
+            $pattern = '/^0/';
+            $phone = preg_replace($pattern, '62', $str);
+        }else if(substr($str, 0, 1) === '8'){
+            $pattern = '/^8/';
+            $phone = preg_replace($pattern, '628', $str);
+        }else {
+            $phone = $str;
+        }
+
+        $requestData['phone'] = $phone;
+        $request->replace($requestData);
+        $values = $this->validate($request, $rules);
            
         $data = $request->all();
         $check = $this->create($data);
@@ -84,6 +104,7 @@ class AuthController extends Controller
     {
       return User::create([
         'name' => $data['name'],
+        'phone' => $data['phone'],
         'email' => $data['email'],
         'password' => Hash::make($data['password'])
       ]);

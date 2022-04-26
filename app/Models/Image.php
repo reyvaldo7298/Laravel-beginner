@@ -14,6 +14,11 @@ class Image extends Model
         return $this->morphTo();
     }
 
+    public function hobby()
+    {
+        return $this->morphedByMany(Hobby::class, 'imageable');
+    }
+
     // public function employees()
     // {
     //     return $this->morphedByMany(Employee::class, 'image');

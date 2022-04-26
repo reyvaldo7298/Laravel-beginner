@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 class Employee extends Model
 {
     use HasFactory, HasRoles;
+    protected $guarded = [];
 
     // public function position()
     // {

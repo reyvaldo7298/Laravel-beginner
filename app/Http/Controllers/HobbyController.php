@@ -18,8 +18,9 @@ class HobbyController extends Controller
     public function showData()
     {
         $hobby = Hobby::find(1);
+        $data = Hobby::all();
 
-        return view('Hobbies.Data',['hobby' => $hobby]);
+        return view('Hobbies.Data',['hobby' => $hobby, 'data' => $data]);
     }
 
     public function viewForm()

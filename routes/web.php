@@ -61,6 +61,8 @@ Route::get('onetoone/pegawai', PegawaiController::class)->name('OneToOnePegawai'
 Route::get('onetomany/jabatan', [JabatanController::class, 'OneToMany'])->name('OneToManyJabatan');
 Route::get('onetomany/pegawai', PegawaiController::class)->name('OneToManyPegawai');
 
+Route::get('manytomany/form-pegawai', [PegawaiController::class, 'viewFormMM'])->name('formMMPegawai');
+Route::post('manytomany/store-pegawai', [PegawaiController::class, 'storeMM'])->name('storeMMPegawai');
 Route::get('manytomany/pegawai', [PegawaiController::class, 'manytomany'])->name('ManyToManyPegawai');
 Route::get('manytomany/hobbies', HobbyController::class)->name('manyToManyHobbies');
 

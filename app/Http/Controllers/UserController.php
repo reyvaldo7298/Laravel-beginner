@@ -31,6 +31,7 @@ class UserController extends Controller
         $roles['roles'] = $request->input('role');
         $user->syncPermissions($permissions['permissions']);
         $user->syncRoles($roles['roles']);
+        // return view('dashboard',['data' => $request->all()]);
         return redirect('data-user');
     }
 

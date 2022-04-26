@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Hobby;
+use App\Models\Position;
 use App\Models\Image;
 use App\Models\Employee;
 
@@ -94,7 +95,44 @@ class PegawaiController extends Controller
     {
         return view('relation.pegawai.manytomany', [
             'title' => 'Many to Many Pegawai',
-            'pegawai' => Employee::simplePaginate(1),
+            'pegawai' => Employee::simplePaginate(2),
         ]);
+    }
+
+    public function viewFormMM()
+    {
+        $hobbies = Hobby::all();
+        $position = Position::all();
+        return view('relation.pegawai.InputPegawai', ['hobbies' => $hobbies, 'position' => $position]);
+    }
+
+    public function storeMM(Request $request)
+    {
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+        $ori_name = $request->file('image')->getClientOriginalName();
+        $name = $request->file('image')->hashName();
+        $path = $request->file('image')->store('public/images');
+
+        $store = Employee::create([
+            'name' => $request->nama,
+            'position_id' => $request->jabatan,
+            'address' => $request->alamat,
+            'image_id' => $name
+        ]);
+
+        $employee = Employee::find(2);
+
+        $image = new Image;
+        $image->name = $ori_name;
+        $image->image = $name;
+
+        $employee->image()->save($image);
+
+        $store->hobi()->sync( $request->hobby );
+
+        return redirect('manytomany/form-pegawai');
     }
 }
