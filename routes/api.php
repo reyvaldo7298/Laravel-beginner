@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -26,6 +27,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     });
 
     Route::resource('user', UserController::class);
+    Route::resource('employee', EmployeeController::class);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
