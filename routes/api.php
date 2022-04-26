@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::resource('user', UserController::class);
     Route::resource('employee', EmployeeController::class);
 
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'signOut']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

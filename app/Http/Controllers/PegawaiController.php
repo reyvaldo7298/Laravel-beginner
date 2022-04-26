@@ -95,7 +95,7 @@ class PegawaiController extends Controller
     {
         return view('relation.pegawai.manytomany', [
             'title' => 'Many to Many Pegawai',
-            'pegawai' => Employee::latest()->simplePaginate(2),
+            'pegawai' => Employee::latest()->simplePaginate(3),
         ]);
     }
 

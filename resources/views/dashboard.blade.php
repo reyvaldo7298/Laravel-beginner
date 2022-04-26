@@ -31,12 +31,16 @@
                         <a class="nav-link" href="{{ route('dataUsers') }}">User</a>
                     </li>
                     @endrole
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{ route('showData') }}" class="nav-link">Employee</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
-                            <a href="{{ route('dataHobbies') }}" class="nav-link">Hobby</a>
-                        </li>
+                        <a href="{{ route('dataHobbies') }}" class="nav-link">Hobby</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('ManyToManyPegawai') }}" class="nav-link">Employee</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                     </li>

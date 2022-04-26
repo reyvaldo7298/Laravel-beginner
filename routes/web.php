@@ -75,4 +75,4 @@ Route::get('/files/{filename}', [FileEncryptionController::class, 'download'])->
 Route::get('image/{filename}', [StorageFileController::class, 'getStorageImage'])->name('image.displayImage');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
