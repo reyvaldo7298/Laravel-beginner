@@ -28,7 +28,7 @@ use App\Models\Hobby;
 Auth::routes();
 
 Route::get('index', [AuthController::class, 'index']); 
-Route::get('dashboard', [AuthController::class, 'dashboard']); 
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard'); 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom'); 
 Route::get('registration', [AuthController::class, 'registration'])->name('register-user');

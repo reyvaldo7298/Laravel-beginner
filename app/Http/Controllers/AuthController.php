@@ -56,9 +56,9 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $authUser = Auth::user(); 
             $success['token'] =  $authUser->createToken('MyAuthApp')->plainTextToken; 
-            return view("dashboard", ['data' => $success['token']]);
-            // return redirect()->intended('dashboard')
-            //             ->withSuccess('Signed in');
+            // return view("dashboard", ['data' => $success['token']]);
+            return redirect()->intended('dashboard')
+                        ->withSuccess('Signed in');
         }
   
         return redirect("login")->withSuccess('Login details are not valid');
