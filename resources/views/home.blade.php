@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    
+
                     Welcome!
 
                     {{ auth()->user()->name }}
@@ -21,8 +21,8 @@
                         ({{ $role }})
                     @endforeach
                     <br>
-                    Goto 
-                    <a href="{{ route('dashboard') }}"> Dashboard</a>
+                    Goto
+                    <a href="{{ route('dashboard.main') }}"> Dashboard</a>
                 </div>
             </div>
         </div>

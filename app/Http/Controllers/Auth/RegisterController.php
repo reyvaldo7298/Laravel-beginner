@@ -64,10 +64,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
         ]);
+
+        event(new Registered($user));
+        auth()->login($user);
+
+        return redirect('/')->with('success', "Account successfully registered.");
     }
 }

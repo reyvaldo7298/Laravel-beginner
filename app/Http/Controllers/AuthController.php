@@ -36,31 +36,31 @@ class AuthController extends Controller
         // User::find(3)->assignRole('user');
         // Remove Role by id
         // User::find(1)->removeRole('member');
-        
+
         // return auth()->user()->hasAllRoles(Role::all());
         // return auth()->user()->getRoleNames();
         // return User::permission('Create Pegawai')->get();
         // return User::role('member')->get();
 
         return view('home');
-    }  
-      
+    }
+
     public function customLogin(Request $request)
     {
         $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
-   
+
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            $authUser = Auth::user(); 
-            $success['token'] =  $authUser->createToken('MyAuthApp')->plainTextToken; 
+            $authUser = Auth::user();
+            $success['token'] =  $authUser->createToken('MyAuthApp')->plainTextToken;
             // return view("dashboard", ['data' => $success['token']]);
             return redirect()->intended('dashboard')
                         ->withSuccess('Signed in');
         }
-  
+
         return redirect("login")->withSuccess('Login details are not valid');
     }
 
@@ -68,9 +68,9 @@ class AuthController extends Controller
     {
         return view('auth.registration');
     }
-      
+
     public function customRegistration(Request $request)
-    {  
+    {
         $rules = array(
             'name' => 'required',
             'phone' => 'required|regex:/(62)[0-9]/',
@@ -93,10 +93,10 @@ class AuthController extends Controller
         $requestData['phone'] = $phone;
         $request->replace($requestData);
         $values = $this->validate($request, $rules);
-           
+
         $data = $request->all();
         $check = $this->create($data);
-         
+
         return redirect("dashboard")->withSuccess('You have signed-in');
     }
 
@@ -108,23 +108,23 @@ class AuthController extends Controller
         'email' => $data['email'],
         'password' => Hash::make($data['password'])
       ]);
-    }    
-    
+    }
+
     public function dashboard()
     {
         if(Auth::check()){
             return view('dashboard');
         }
 
-        
-  
+
+
         return redirect("login")->withSuccess('You are not allowed to access');
     }
-    
+
     public function signOut() {
         Session::flush();
         Auth::logout();
-  
+
         return Redirect('login');
     }
 }

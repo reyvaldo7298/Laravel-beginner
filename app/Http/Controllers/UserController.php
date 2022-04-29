@@ -11,7 +11,7 @@ class UserController extends Controller
 {
 
     public function showData(){
-        $users = User::all();
+        $users = User::simplePaginate(5);
         return view('User.Data', ['users'=> $users]);
     }
 

@@ -4,7 +4,7 @@
     <title>Become Hero</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-   
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -37,9 +37,11 @@
                     <li class="nav-item">
                         <a href="{{ route('dataHobbies') }}" class="nav-link">Hobby</a>
                     </li>
-
                     <li class="nav-item">
                         <a href="{{ route('ManyToManyPegawai') }}" class="nav-link">Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('ManyToManyPegawai') }}" class="nav-link">DB Management</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>

@@ -16,7 +16,7 @@ class employeCRUDTest extends TestCase
      *
      * @return void
      */
-    
+
     public function test_insert_user_api()
     {
         $user = User::factory()->create();
@@ -63,19 +63,4 @@ class employeCRUDTest extends TestCase
                          ->get('/');
         $response->assertStatus(200);
     }
-
-    // public function InsertEmployee()
-    // {
-    //     $data = [
-    //         'name' => $this->faker->firstNameMale,
-    //         'phone' => '8821333333',
-    //         'email' => $this->faker->email,
-    //         'password' => $this->faker->md5,
-    //     ];
-
-    //     $response = $this->post('/store-pegawai',$data);
-        
-        // $response->assertOk();
-        // $this->assertCount(1,Employee::all());
-    // }
 }

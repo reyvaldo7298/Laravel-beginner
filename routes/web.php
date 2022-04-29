@@ -7,6 +7,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HobbyController;
 use App\Http\Controllers\FileEncryptionController;
 use App\Http\Controllers\StorageFileController;
+use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UserController;
 use App\Models\Hobby;
 
@@ -27,12 +28,12 @@ use App\Models\Hobby;
 
 Auth::routes();
 
-Route::get('index', [AuthController::class, 'index']); 
-Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard'); 
+Route::get('index', [AuthController::class, 'index']);
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('login', [AuthController::class, 'index'])->name('login');
-Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom'); 
+Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom');
 Route::get('registration', [AuthController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [AuthController::class, 'customRegistration'])->name('register.custom'); 
+Route::post('custom-registration', [AuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 
 // CRUD
@@ -75,4 +76,14 @@ Route::get('/files/{filename}', [FileEncryptionController::class, 'download'])->
 Route::get('image/{filename}', [StorageFileController::class, 'getStorageImage'])->name('image.displayImage');
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Verification
+Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify')->middleware(['signed']);
+Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+
+Route::group(['middleware' => ['verified']], function() {
+    Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard-main', [AuthController::class, 'dashboard'])->name('dashboard.main');
+});
