@@ -2,7 +2,9 @@
 @section('content')
 
 <h3>Data User</h3>
+<br>
 
+    <a href="{{ route('importExportView.user') }}">Import User</a>
 	<table class="table table-hover">
 		<tr>
 			<th>Name</th>
@@ -10,7 +12,7 @@
 			<th>Role</th>
 			<th>Action</th>
         </tr>
-        
+
         {{-- {{ $hobby->image }} --}}
 		@foreach($users as $user)
 		<tr>
@@ -24,7 +26,7 @@
 			<td>
 				<a class="btn btn-warning" href="edit-user/{{ $user->id }}">Edit</a>
 			</td>
-		</tr> 
+		</tr>
 		@endforeach
 	</table>
 	{{ $users->links() }}

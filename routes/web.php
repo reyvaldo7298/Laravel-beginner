@@ -9,6 +9,7 @@ use App\Http\Controllers\FileEncryptionController;
 use App\Http\Controllers\StorageFileController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ExcelController;
 use App\Models\Hobby;
 
 /*
@@ -87,3 +88,7 @@ Route::group(['middleware' => ['verified']], function() {
     Route::get('/dashboard', [AuthController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard-main', [AuthController::class, 'dashboard'])->name('dashboard.main');
 });
+
+Route::get('export', [ExcelController::class,'export'])->name('export.user');
+Route::get('importExportView', [ExcelController::class, 'importExportView'])->name('importExportView.user');
+Route::post('import', [ExcelController::class,'import'])->name('import.user');
